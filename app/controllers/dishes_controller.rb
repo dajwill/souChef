@@ -66,6 +66,16 @@ class DishesController < ApplicationController
     end
   end
 
+  def like
+    DishLike.new(user_id: current_user.id, dish_id: params[:dish_id]).save
+    redirect_to dishes_url
+  end
+
+  def unlike
+    DishLike.find_by(user_id: current_user.id, dish_id: params[:dish_id]).destroy
+    redirect_to dishes_url
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dish

@@ -21,10 +21,17 @@
         <td><%= dish.type %></td>
         <td><%= dish.restaurant %></td>
         <td><%= dish.location %></td>
-        <td><%= User.find(dish.user_id) %></td>
+        <td><%= dish.user.name %></td>
         <td><%= link_to 'Show', dish %></td>
         <td><%= link_to 'Edit', edit_dish_path(dish) %></td>
         <td><%= link_to 'Destroy', dish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <% if !DishLike.find_by(user_id: current_user.id, dish_id: dish.id) %>
+            <%= link_to 'Like', dish_like_path(dish_id: dish.id), method: :post, data: { confirm: 'Do you want to like this dish'} %>
+          <% else %>
+            <%= link_to 'Unlike', dish_unlike_path(dish_id: dish.id), method: :post, data: { confirm: 'Do you want to unlike this dish'} %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

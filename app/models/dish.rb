@@ -1,6 +1,6 @@
 class Dish < ActiveRecord::Base
 	belongs_to :user
-	has_many :likes, :through => :dish_likes
+	has_many :likers, :through => :dish_likes, class_name: 'User'
 end
 
 

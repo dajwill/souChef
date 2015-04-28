@@ -3,6 +3,5 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   has_many :dishes, :dependent => :destroy
 
-  has_many :dish_likes
-  has_many :dish_likes, :through => :dish_likes, :source => :thing
+  has_many :liked_dishes, :through => :dish_likes, class_name: 'Dish'
 end
